@@ -1,19 +1,66 @@
 #include "GestorDeEventos.h"
 #include "Evento.h"
 #include <memory>
+#include <iostream>
 
 using namespace std;
 
 int main()
 {
     GestorDeEventos event_mgt;
+    int chosen_option = 0;
+    bool control = true;
 
-    shared_ptr<Evento> e1 = make_shared<Evento>("11-09-2026", "Primer Evento");
-    shared_ptr<Evento> e2 = make_shared<Evento>("12-09-2026", "Segundo Evento");
-    shared_ptr<Evento> e3 = make_shared<Evento>("13-09-2026", "Tercer Evento");
-    
-    event_mgt.AddEvent(e1);
-    event_mgt.AddEvent(e2);
-    event_mgt.AddEvent(e3);
-    event_mgt.ListEvents();
+    do
+    {
+        cout << endl << endl << "=============================================" << endl << endl;
+        cout << "Por favor digite el número correspondiente a la acción que desea ejecutar: " << endl << endl;
+        cout << "1) Agregar un nuevo evento" << endl;
+        cout << "2) Listar todos los eventos" << endl;
+        cout << "3) Salir del programa" << endl << endl;
+
+        cout << "Opción (número): ";
+        cin >> chosen_option;
+        cout << endl;
+
+        switch(chosen_option)
+        {
+            case 1:
+            {
+                string date;
+                cout << "Introduzca la fecha del evento (DD-MM-YYYY): ";
+                cin >> date;
+
+                string title;
+                cout << "Introduzca el titulo del evento: ";
+                cin >> title;
+                cout << endl << endl;
+
+                shared_ptr<Evento> e = make_shared<Evento>(date, title);
+                event_mgt.AddEvent(e);
+                cout << "Evento agregado de manera exitosa." << endl;
+
+                break;
+            }
+
+            case 2:
+            {
+                cout << "Listado de todos los eventos:" << endl;
+                event_mgt.ListEvents();
+                break;
+            }
+
+            case 3:
+            {
+                control = false;
+                break;
+            }
+
+            default:
+            {
+                cout << "ERROR: Se introdujo una opción que no es válida." << endl;
+                return -1;
+            }
+        }
+    } while (control);
 }
