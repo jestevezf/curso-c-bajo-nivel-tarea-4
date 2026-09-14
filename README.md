@@ -1,3 +1,3 @@
 # Homework 4
 
-This code is compliant with homework 4 of the low level programming in C/C++ course.
+This project was developed as part of Homework 4 for the Low-Level Programming in C/C++ course.
